@@ -1,0 +1,21 @@
+QMainWindow {
+    background-image: url('img/neon.png');
+    background-size: cover;
+    background-position: center;
+}
+QPushButton {
+    border: 1px;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12pt;
+    padding: 5px;
+    margin: 5px;
+
+}
+QPushButton:hover {
+    background-color: #047af9;
+    font-size: 15pt;
+}
+QPushButton:pressed {
+    background-color: #59a6f9;
+}
