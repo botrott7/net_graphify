@@ -6,13 +6,12 @@ from ui.topology import show_topology
 from ui.traffic_analysis import show_traffic_analysis
 from ui.interface_data import show_interface_data
 from ui.device_availability import show_device_availability
-from ui.port_scanner import show_port_scanner
+from ui.port_scanner import PortScanner
 
 
 class MyApp(QMainWindow):
     def __init__(self):
         super().__init__()
-
         self.initUI()
 
     def initUI(self):
@@ -42,12 +41,20 @@ class MyApp(QMainWindow):
 
         btn_port_scanner = QPushButton('Порт-сканер', self)
         btn_port_scanner.setGeometry(50, 280, 400, 50)
-        btn_port_scanner.clicked.connect(show_port_scanner)
+        btn_port_scanner.clicked.connect(self.show_port_scanner)
         btn_port_scanner.setStyleSheet("text-align: center;")
 
         self.setGeometry(300, 300, 480, 400)
-        self.setFixedSize(480, 400)
+        # self.setFixedSize(480, 400)
         self.show()
+
+    def show_port_scanner(self):
+        self.hide()
+        self.port_scanner_window = PortScanner(self)
+        self.port_scanner_window.show()
+
+    def closeEvent(self, event):
+        sys.exit(app.exec_())
 
 
 if __name__ == '__main__':

@@ -1,0 +1,37 @@
+/* Main window styling */
+QWidget {
+    /* background-image: url('img/neon.png'); */
+    background-color: blue;
+    background-size: cover;
+    background-position: center;
+}
+/* Button styling */
+QPushButton {
+    border: 1px solid #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12pt;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+    color: #ffffff;
+    background-color: transparent;
+}
+QPushButton:hover {
+    background-color: #047af9;
+    font-size: 15pt;
+}
+QPushButton:pressed {
+    background-color: #59a6f9;
+}
+/* Label styling */
+QLabel {
+    font-weight: bold;
+    font-size: 12pt;
+    color: #ffffff;
+}
+/* Layout styling */
+QLineEdit {
+    color: #ffffff;
+    font-size: 12pt;
+    font-weight: bold;
+}
