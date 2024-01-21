@@ -1,13 +1,12 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
 from PyQt5.QtGui import QFontDatabase
 
 from ui.topology import show_topology
 from ui.traffic_analysis import show_traffic_analysis
 from ui.interface_data import show_interface_data
-from ui.device_availability import show_device_availability
+from ui.device_availability import DeviceAvailability
 from ui.port_scanner import PortScanner
-
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
 
 class MyApp(QMainWindow):
     def __init__(self):
@@ -36,7 +35,7 @@ class MyApp(QMainWindow):
 
         btn_device_availability = QPushButton('Проверка доступности сетевых\n устройств', self)
         btn_device_availability.setGeometry(50, 210, 400, 80)
-        btn_device_availability.clicked.connect(show_device_availability)
+        btn_device_availability.clicked.connect(self.show_device_availability)
         btn_device_availability.setStyleSheet("text-align: center;")
 
         btn_port_scanner = QPushButton('Порт-сканер', self)
@@ -47,6 +46,11 @@ class MyApp(QMainWindow):
         self.setGeometry(300, 300, 480, 400)
         # self.setFixedSize(480, 400)
         self.show()
+
+    def show_device_availability(self):
+        self.hide()
+        self.device_availability_window = DeviceAvailability()
+        self.device_availability_window.show()
 
     def show_port_scanner(self):
         self.hide()
