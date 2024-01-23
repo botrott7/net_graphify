@@ -40,9 +40,9 @@ class DeviceAvailability(QWidget):
 
     def check_device_availability(self):
         start_ip = self.input_start.text()
-        end_ip = self.input_end.text()
+        prefix = self.input_end.text()
 
-        network = f"{start_ip}/{end_ip}"
+        network = f"{start_ip}/{prefix}"
 
         network_ip = ipaddress.IPv4Network(network)
         available_devices = []

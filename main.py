@@ -1,9 +1,8 @@
 import sys
 from PyQt5.QtGui import QFontDatabase
 
-from ui.topology import show_topology
+from ui.topology import Topology
 from ui.traffic_analysis import TrafficAnalyzer
-from ui.interface_data import show_interface_data
 from ui.device_availability import DeviceAvailability
 from ui.port_scanner import PortScanner
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
@@ -20,7 +19,7 @@ class MyApp(QMainWindow):
 
         btn_topology = QPushButton('Отображение топологии сети', self)
         btn_topology.setGeometry(50, 50, 400, 50)
-        btn_topology.clicked.connect(show_topology)
+        btn_topology.clicked.connect(self.show_topology)
         btn_topology.setStyleSheet("text-align: center;")
 
         btn_traffic_analysis = QPushButton('Анализ сетевого трафика', self)
@@ -41,6 +40,11 @@ class MyApp(QMainWindow):
         self.setGeometry(700, 300, 480, 370)
         # self.setFixedSize(480, 400)
         self.show()
+
+    def show_topology(self):
+        self.hide()
+        self.device_availability_window = Topology()
+        self.device_availability_window.show()
 
     def show_traffic_analysis(self):
         self.hide()
