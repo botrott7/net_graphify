@@ -24,9 +24,10 @@ class TrafficThread(QThread):
 
 
 class TrafficAnalyzer(QWidget):
-    def __init__(self):
+    def __init__(self, main_app):
         super().__init__()
-        self.setStyleSheet(open('styles/style_port_scanner.css').read())
+        self.main_app = main_app
+        # self.setStyleSheet(open('styles/style_port_scanner.css').read())
         self.setWindowTitle("Анализ трафика")
         self.layout = QVBoxLayout()
 
@@ -44,7 +45,11 @@ class TrafficAnalyzer(QWidget):
         self.stop_button.clicked.connect(self.stop_traffic_analysis)
         self.layout.addWidget(self.stop_button)
 
+        self.setGeometry(750, 400, 400, 250)
         self.setLayout(self.layout)
+
+    def closeEvent(self, event):
+        self.main_app.show()
 
     def start_traffic_analysis(self):
         self.result_browser.clear()

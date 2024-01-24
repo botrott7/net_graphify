@@ -7,13 +7,14 @@ from scapy.sendrecv import srp
 
 
 class DeviceAvailability(QWidget):
-    def __init__(self):
+    def __init__(self, main_app):
         super().__init__()
+        self.main_app = main_app
         self.initUI()
 
     def initUI(self):
         self.setWindowTitle('Проверка доступности сетевых устройств')
-        self.setStyleSheet(open('styles/style_port_scanner.css').read())
+        # self.setStyleSheet(open('styles/style_port_scanner.css').read())
         self.setGeometry(300, 300, 480, 400)
         layout = QVBoxLayout()
 
@@ -21,10 +22,12 @@ class DeviceAvailability(QWidget):
         layout.addWidget(self.label_start)
         self.input_start = QLineEdit(self)
         layout.addWidget(self.input_start)
+
         self.label_end = QLabel('Введите префикс подсети:', self)
         layout.addWidget(self.label_end)
         self.input_end = QLineEdit(self)
         layout.addWidget(self.input_end)
+
         self.result_label = QLabel('Результаты сканирования:', self)
         layout.addWidget(self.result_label)
         self.result_text = QTextEdit(self)
@@ -33,10 +36,13 @@ class DeviceAvailability(QWidget):
 
         self.btn_check_availability = QPushButton('Проверить доступность устройств', self)
         layout.addWidget(self.btn_check_availability)
+        self.btn_check_availability.clicked.connect(self.check_device_availability)
+
+        self.setGeometry(750, 400, 400, 250)
         self.setLayout(layout)
 
-        # Подключаем событие нажатия кнопки
-        self.btn_check_availability.clicked.connect(self.check_device_availability)
+    def closeEvent(self, event):
+        self.main_app.show()
 
     def check_device_availability(self):
         start_ip = self.input_start.text()
@@ -55,7 +61,6 @@ class DeviceAvailability(QWidget):
         for thread in threads:
             thread.join()
 
-        # Очищаем поле вывода результатов
         self.result_text.clear()
 
         for device in available_devices:

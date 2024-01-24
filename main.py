@@ -1,11 +1,13 @@
 import sys
+
 from PyQt5.QtGui import QFontDatabase
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
 
 from ui.topology import Topology
 from ui.traffic_analysis import TrafficAnalyzer
 from ui.device_availability import DeviceAvailability
 from ui.port_scanner import PortScanner
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
+
 
 class MyApp(QMainWindow):
     def __init__(self):
@@ -43,17 +45,17 @@ class MyApp(QMainWindow):
 
     def show_topology(self):
         self.hide()
-        self.device_availability_window = Topology()
+        self.device_availability_window = Topology(self)
         self.device_availability_window.show()
 
     def show_traffic_analysis(self):
         self.hide()
-        self.device_availability_window = TrafficAnalyzer()
+        self.device_availability_window = TrafficAnalyzer(self)
         self.device_availability_window.show()
 
     def show_device_availability(self):
         self.hide()
-        self.device_availability_window = DeviceAvailability()
+        self.device_availability_window = DeviceAvailability(self)
         self.device_availability_window.show()
 
     def show_port_scanner(self):

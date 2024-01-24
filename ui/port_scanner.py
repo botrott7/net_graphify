@@ -1,8 +1,7 @@
 import nmap
 import traceback
-
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QProgressBar
-
+from PyQt5.QtWidgets import (QWidget, QLabel, QLineEdit, QPushButton,
+                             QProgressBar, QHBoxLayout, QSizePolicy)
 from threading import Thread
 from tqdm import tqdm
 
@@ -15,11 +14,12 @@ class PortScanner(QWidget):
 
     def initUI(self):
         self.setWindowTitle("Port Scanner")
-        self.setStyleSheet(open('styles/style_port_scanner.css').read())
-        self.layout = QVBoxLayout()
+        # self.setStyleSheet(open('styles/style_port_scanner.css').read())
+        self.layout = QHBoxLayout()
 
         self.target_label = QLabel("IP:")
         self.target_input = QLineEdit()
+        self.target_input.setFixedWidth(100)
         self.layout.addWidget(self.target_label)
         self.layout.addWidget(self.target_input)
 
@@ -37,13 +37,18 @@ class PortScanner(QWidget):
         self.scan_button.clicked.connect(self.start_scan_thread)
         self.layout.addWidget(self.scan_button)
 
-        self.result_label = QLabel("Результат:")
-        self.layout.addWidget(self.result_label)
-
         self.progress_bar = QProgressBar()
+        self.progress_bar.setSizePolicy(QSizePolicy.Expanding,
+                                        QSizePolicy.Preferred)
+        self.progress_bar.setFixedHeight(25)
+        self.progress_bar.setFixedWidth(200)
         self.layout.addWidget(self.progress_bar)
 
+        self.result_label = QLabel()
+        self.layout.addWidget(self.result_label)
+
         self.setLayout(self.layout)
+        self.setGeometry(750, 400, 400, 250)
 
     def closeEvent(self, event):
         self.main_app.show()

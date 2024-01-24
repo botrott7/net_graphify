@@ -2,23 +2,32 @@ import netifaces
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QTextBrowser, QPushButton
 from threading import Thread
 
+
 class Topology(QWidget):
-    def __init__(self):
+    def __init__(self, main_app):
         super().__init__()
+        self.main_app = main_app
         self.initUI()
 
     def initUI(self):
-        self.setStyleSheet(open('styles/style_port_scanner.css').read())
+        # self.setStyleSheet(open('styles/style_port_scanner.css').read())
         self.setWindowTitle('Топологии сети')
         self.layout = QVBoxLayout()
+
         self.result_name = QLabel('Результат')
         self.layout.addWidget(self.result_name)
         self.result_topology = QTextBrowser()
         self.layout.addWidget(self.result_topology)
+
         self.start_btn = QPushButton('Старт')
         self.start_btn.clicked.connect(self.start_topology)
         self.layout.addWidget(self.start_btn)
+
+        self.setGeometry(750, 400, 400, 250)
         self.setLayout(self.layout)
+
+    def closeEvent(self, event):
+        self.main_app.show()
 
     def get_network_interfaces(self):
         interfaces = netifaces.interfaces()
