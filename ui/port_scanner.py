@@ -13,7 +13,7 @@ class PortScanner(QWidget):
         self.initUI()
 
     def initUI(self):
-        self.setWindowTitle("Port Scanner")
+        self.setWindowTitle("Порт-сканер")
         # self.setStyleSheet(open('styles/style_port_scanner.css').read())
         self.layout = QHBoxLayout()
 
